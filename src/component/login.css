@@ -1,0 +1,94 @@
+.login-container, .signup-container {
+    background-color: #263a4b;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.te {
+    color: rgb(135, 180, 217);
+    font-size: 1.2rem;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #ded4d4;
+    margin-bottom: 20px;
+}
+
+.form-floating {
+    margin-bottom: 20px;
+    animation: slideIn 0.6s ease-in-out;
+}
+
+.form-control {
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn-primary {
+    font-size: 1rem;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.text-danger {
+    font-size: 0.9rem;
+    color: #dc3545;
+    margin-top: 10px;
+}
+
+.link {
+    color: #007bff;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.link:hover {
+    color: #0056b3;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.signup-link, .login-link {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #ded4d4;
+}

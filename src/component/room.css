@@ -1,0 +1,441 @@
+/* Overall Container */
+.chat-container {
+    display: flex; /* Use Flexbox for layout */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Room Selector */
+.chat-room-selector {
+    width: 250px; /* Fixed width for the room selector */
+    background-color: #2c2f33;  /* Lighter background for better contrast */
+    overflow-y: auto; /* Scrollable if content overflows */
+    color: #ffffff;
+    height: 100%; /* Full height */
+    padding: 10px; /* Padding for some space */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    position: fixed; /* Fix the room selector to the left */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left edge */
+}
+
+/* Chat Room Display Area */
+.chat-room-display {
+    margin-left: 250px; /* Space for the fixed room selector */
+    flex: 1; /* Takes the remaining space */
+    display: flex;
+    flex-direction: column; /* Column layout */
+    padding: 1rem; /* Padding for the chat area */
+}
+
+/* Chat Room Style */
+.chat-room {
+    display: flex;
+    justify-content: space-between; /* Space between room label and join button */
+    align-items: center; /* Center vertically */
+    margin: 0.5rem 0; /* Margin for spacing */
+}
+
+/* Button Styles */
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.chat-room h3 {
+    font-size: 1rem;
+    color: #ffffff;
+    margin: 0;
+}
+
+
+
+.chat-room button {
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Chat Room Button */
+
+
+.chat-room-list {
+    flex-grow: 1; /* Fills remaining space */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* Create Room Button */
+.chat-room {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #3a3d42; /* Slightly lighter than the main background */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.chat-room:hover {
+    background-color: #40444b; /* Lighter hover effect */
+    transform: translateY(-2px); /* Slight elevation on hover */
+}
+
+/* User Info Styles */
+.user-info {
+    display: flex;
+    justify-content: space-between; /* Align username and logout button side by side */
+    align-items: center; /* Center align items */
+    background-color: #16181c;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.user-info h2 {
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+.user-info .btn:hover {
+    background-color: #5b6ec9; /* Darker hover effect */
+}
+.user-info .btn {
+    background-color: #7289da;
+    border: none;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Create Room Popup */
+.create-room-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Darken the overlay for better focus on the form */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-in-out; /* Smooth fade-in effect */
+}
+
+.create-room-form {
+    background-color: #ffffff; /* White background for the form */
+    padding: 25px 30px;
+    border-radius: 15px;
+    width: 350px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    animation: slideUp 0.4s ease-in-out; /* Form slide-in animation */
+}
+
+.create-room-form h3 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #333; /* Dark text for contrast */
+    text-align: center;
+    font-weight: bold;
+}
+
+.create-room-form label {
+    display: block;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666; /* Slightly darker label */
+}
+
+.create-room-form input,
+.create-room-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9; /* Light gray background for inputs */
+    color: #333; /* Dark text */
+    transition: border-color 0.3s ease;
+}
+
+.create-room-form input:focus,
+.create-room-form select:focus {
+    border-color: #007bff; /* Focus effect with blue outline */
+    outline: none;
+}
+
+/* Form Buttons */
+.form-buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-buttons button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-buttons button:first-child {
+    background-color: #007bff; /* Primary button color */
+    color: white; /* White text for primary button */
+}
+
+.form-buttons button:first-child:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.form-buttons button:last-child {
+    background-color: #f1f1f1; /* Light gray for cancel button */
+    color: #333; /* Darker text for cancel button */
+}
+
+.form-buttons button:last-child:hover {
+    background-color: #e1e1e1; /* Slightly darker gray on hover */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Logout Button */
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    padding: 10px 16px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    transform: translateY(-2px);
+}
+/* Management Menu Styles */
+.room-management {
+    position: relative;
+    display: inline-block;
+    z-index: 10; /* Ensures it appears above other elements */
+}
+
+.manage-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s;
+    padding: 8px; /* Add padding to increase clickable area */
+}
+
+.management-options {
+    display: none;
+    position: absolute;
+    background-color: #1c161d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 11; /* Ensure it stays on top of other elements */
+    margin-top: 5px;
+    min-width: 150px;
+    border-radius: 5px;
+    left: -50px;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden; /* Initially hidden */
+    pointer-events: none; /* Prevent accidental clicks before it's visible */
+}
+
+/* When hovering over the button or the options, keep the menu open */
+.room-management:hover .management-options,
+.management-options:hover {
+    display: block;
+    opacity: 1; /* Make it visible */
+    visibility: visible; /* Ensure visibility */
+    pointer-events: auto; /* Allow interaction once it's visible */
+}
+
+.management-options button {
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.2s;
+}
+
+.management-options button:hover {
+    background-color: #3a3d42;
+}
+
+/* Ensure hover persists even if moving the cursor quickly */
+.room-management:hover .management-options,
+.management-options:hover {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* Allow interaction */
+}
+
+/* Optional: If the options are disappearing too quickly, you can add a delay */
+.room-management:hover .management-options {
+    transition-delay: 0.1s; /* Adds a slight delay to prevent flickering */
+}
+
+
+/* Overall Container */
+.chat-container {
+    display: flex; /* Use Flexbox for layout */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Room Selector */
+.chat-room-selector {
+    width: 250px; /* Fixed width for the room selector */
+    background-color: #2c2f33;  /* Lighter background for better contrast */
+    overflow-y: auto; /* Scrollable if content overflows */
+    color: #ffffff;
+    height: 100%; /* Full height */
+    padding: 10px; /* Padding for some space */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    position: fixed; /* Fix the room selector to the left */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left edge */
+}
+
+/* Chat Room Display Area */
+.chat-room-display {
+    margin-left: 250px; /* Space for the fixed room selector */
+    flex: 1; /* Takes the remaining space */
+    display: flex;
+    flex-direction: column; /* Column layout */
+    padding: 1rem; /* Padding for the chat area */
+}
+
+/* Chat Room Style */
+.chat-room {
+    display: flex;
+    justify-content: space-between; /* Space between room label and join button */
+    align-items: center; /* Center vertically */
+    margin: 0.5rem 0; /* Margin for spacing */
+    padding: 10px 15px; /* Added padding for better spacing */
+    background-color: #3a3d42; /* Slightly lighter than the main background */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.chat-room:hover {
+    background-color: #40444b; /* Lighter hover effect */
+    transform: translateY(-2px); /* Slight elevation on hover */
+}
+
+.chat-room h3 {
+    font-size: 1rem;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* Management Menu Styles */
+.room-management {
+    position: relative;
+    display: inline-block;
+    z-index: 10; /* Ensures it appears above other elements */
+}
+
+.manage-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s;
+    padding: 8px; /* Add padding to increase clickable area */
+}
+
+.management-options {
+    display: none;
+    position: absolute;
+    background-color: #1c161d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 11; /* Ensure it stays on top of other elements */
+    margin-top: 5px;
+    min-width: 150px;
+    border-radius: 5px;
+    left: -50px;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden; /* Initially hidden */
+    pointer-events: none; /* Prevent accidental clicks before it's visible */
+}
+
+/* When hovering over the button or the options, keep the menu open */
+.room-management:hover .management-options,
+.management-options:hover {
+    display: block;
+    opacity: 1; /* Make it visible */
+    visibility: visible; /* Ensure visibility */
+    pointer-events: auto; /* Allow interaction once it's visible */
+}
+
+.management-options button {
+    padding: 8px 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.2s;
+}
+
+.management-options button:hover {
+    background-color: #3a3d42; /* Button hover effect */
+}
+
+/* Ensure hover persists even if moving the cursor quickly */
+.room-management:hover .management-options,
+.management-options:hover {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto; /* Allow interaction */
+}
+
+/* Optional: If the options are disappearing too quickly, you can add a delay */
+.room-management:hover .management-options {
+    transition-delay: 0.1s; /* Adds a slight delay to prevent flickering */
+}
+
+/* Additional styles from previous code here... */
+
+
