@@ -3,7 +3,7 @@ import axios from 'axios';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ setCurrentUser, setIsAuthenticated }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -22,9 +22,13 @@ const Login = () => {
                 username: response.data.username
             };
             console.log("Logged in user info: ", userInfo);
-            localStorage.setItem('currentUser', JSON.stringify(userInfo)); // Store user in localStorage
+            
+            localStorage.setItem('currentUser', JSON.stringify(userInfo));
             localStorage.setItem('token', jwtToken);
-            navigate('/chatrooms');
+            
+            setCurrentUser(userInfo); // Update currentUser in App
+            setIsAuthenticated(true); // Update isAuthenticated in App
+            navigate('/chatrooms'); // Navigate to chatrooms
         } catch (err) {
             setError('Invalid username or password');
         }

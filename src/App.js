@@ -6,38 +6,60 @@ import ChatRoomSelector from './component/Room';
 import ChatRoom from './component/ChatRoom';
 
 const App = () => {
-    const [currentUser, setCurrentUser] = useState(null);
+    const [currentUser, setCurrentUser] = useState(() => {
+        const storedUser = localStorage.getItem('currentUser');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
+
     const [selectedRoom, setSelectedRoom] = useState(null);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(() => {
+        const token = localStorage.getItem('token');
+        return !!token;
+    });
 
     useEffect(() => {
-        // Check if there is a token in local storage
+        // Check for updates in authentication status on every render
         const token = localStorage.getItem('token');
-        setIsAuthenticated(!!token); // Update isAuthenticated based on token presence
-        // Load current user from local storage if available
-        const storedUser = localStorage.getItem('currentUser');
-        if (storedUser) {
-            setCurrentUser(JSON.parse(storedUser));
-        }
-    }, []); // Empty dependency array ensures this runs only on mount
+        setIsAuthenticated(!!token); // Set isAuthenticated based on the presence of token
+    }, [currentUser]);
+
+    const handleLogout = () => {
+        setCurrentUser(null); // Clear current user on logout
+        setIsAuthenticated(false); // Update auth state
+        localStorage.removeItem('token'); // Clear the token
+        localStorage.removeItem('currentUser'); // Clear currentUser
+    };
+
     return (
         <Router>
             <Routes>
-                {/* Route for login */}
-                <Route path="/login" element={<Login />} />
+                {/* Route for login, redirecting to chatrooms if already authenticated */}
+                <Route 
+                    path="/login" 
+                    element={
+                        isAuthenticated ? (
+                            <Navigate to="/chatrooms" />
+                        ) : (
+                            <Login setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} />
+                        )
+                    } 
+                />
 
                 {/* Default route redirects to login if not authenticated */}
-                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/" element={<Navigate to={isAuthenticated ? "/chatrooms" : "/login"} />} />
 
                 {/* Route for signup */}
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/signup" element={<Signup setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} />} />
 
                 {/* Route for chat room selection, protected by authentication */}
                 <Route 
                     path="/chatrooms" 
                     element={
                         isAuthenticated ? (
-                            <ChatRoomSelector/>
+                            <ChatRoomSelector 
+                                currentUser={currentUser}
+                                setSelectedRoom={setSelectedRoom}
+                            />
                         ) : (
                             <Navigate to="/login" />
                         )
@@ -52,12 +74,8 @@ const App = () => {
                             <ChatRoom
                                 currentUser={currentUser}
                                 selectedRoom={selectedRoom}
-                                onLogout={() => {
-                                    setCurrentUser(null); // Clear current user on logout
-                                    localStorage.removeItem('token'); // Optionally clear the token
-                                    localStorage.removeItem('currentUser'); // Clear currentUser on logout
-                                }}
-                                onLeave={() => setSelectedRoom(null)} // Reset selected room
+                                onLogout={handleLogout}
+                                onLeave={() => setSelectedRoom(null)}
                             />
                         ) : (
                             <Navigate to="/login" />

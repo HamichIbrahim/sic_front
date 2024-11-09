@@ -1,17 +1,27 @@
-.login-container, .signup-container {
-    background-color: #263a4b;
+/* Add a background image with opacity */
+body {
+   
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    opacity: 0.9;
+}
+
+.login-container {
+    background-color: rgba(38, 58, 75, 0.85); /* Dark background with transparency */
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     padding: 40px;
     max-width: 400px;
     margin: auto;
     text-align: center;
-    animation: fadeIn 0.6s ease-in-out;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
 .te {
     color: rgb(135, 180, 217);
     font-size: 1.2rem;
+    margin-bottom: 5px;
 }
 
 h1 {
@@ -27,15 +37,16 @@ h1 {
 
 .form-control {
     font-size: 1rem;
-    border: 1px solid #ccc;
+    border: 1px solid #aaa;
     border-radius: 5px;
-    padding: 10px;
+    padding: 12px;
     transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: rgba(255, 255, 255, 0.9); /* Light background for input fields */
 }
 
 .form-control:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: #66afe9;
+    box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
 }
 
 .btn-primary {
@@ -43,28 +54,36 @@ h1 {
     background-color: #007bff;
     border: none;
     border-radius: 5px;
-    padding: 10px;
-    transition: background-color 0.3s;
+    padding: 12px;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .btn-primary:hover {
     background-color: #0056b3;
+    transform: scale(1.05);
 }
 
 .text-danger {
     font-size: 0.9rem;
-    color: #dc3545;
+    color: #ff6b6b;
     margin-top: 10px;
 }
 
 .link {
-    color: #007bff;
+    color: #66afe9;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: color 0.3s, text-decoration 0.3s;
 }
 
 .link:hover {
-    color: #0056b3;
+    color: #3498db;
+    text-decoration: underline;
+}
+
+.signup-link, .login-link {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #ded4d4;
 }
 
 @keyframes fadeIn {
@@ -85,10 +104,4 @@ h1 {
         transform: translateY(0);
         opacity: 1;
     }
-}
-
-.signup-link, .login-link {
-    margin-top: 20px;
-    font-size: 1rem;
-    color: #ded4d4;
 }
