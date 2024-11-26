@@ -41,9 +41,22 @@ const App = () => {
                             <Navigate to="/chatrooms" />
                         ) : (
                             <Login setCurrentUser={setCurrentUser} setIsAuthenticated={setIsAuthenticated} />
+                           
                         )
                     } 
                 />
+{
+<Route 
+                    path="/singup" 
+                    element={
+                        isAuthenticated ? (
+                            <Navigate to="/chatrooms" />
+                        ) : (
+                            <Signup/>
+                        )
+                    } 
+                />}
+
 
                 {/* Default route redirects to login if not authenticated */}
                 <Route path="/" element={<Navigate to={isAuthenticated ? "/chatrooms" : "/login"} />} />

@@ -64,7 +64,7 @@ const Login = ({ setCurrentUser, setIsAuthenticated }) => {
                 {error && <p className="text-danger">{error}</p>}
             </form>
             <p className="signup-link">
-                Don't have an account? <span className="link">Sign up here</span>
+                Don't have an account? <span className="link" onClick={() => navigate('/singup')}>Sign up here</span>
             </p>
         </div>
     );

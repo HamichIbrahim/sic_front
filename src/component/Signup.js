@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './login.css'; // Reuse the same styles for a consistent design
+import './login.css';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
@@ -16,11 +16,16 @@ const Signup = () => {
                 username,
                 password
             });
-            if (response.status === 201) {
-                navigate('/login'); // Redirect to login page after successful signup
-            }
+
+            navigate('/login'); // Redirect to login page after successful signup
         } catch (err) {
-            setError('Error creating account. Please try again.');
+            if (err.response && err.response.status === 409) {
+                // User already exists (HTTP 409 Conflict)
+                setError('User already exists. Please try a different username.');
+            } else {
+                // Other errors
+                setError('Error creating account. Please try again.');
+            }
         }
     };
 

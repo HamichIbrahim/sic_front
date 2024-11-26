@@ -28,7 +28,7 @@ const ChatRoom = ({ currentUser, selectedRoom, onLogout, onLeave}) => {
             const firstUnseenMessageId = unseenMessages[0].id;
             const unseenMessageElement = document.getElementById(`message-${firstUnseenMessageId}`);
             if (unseenMessageElement) {
-                unseenMessageElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                unseenMessageElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
             }
         }
     };
@@ -132,7 +132,6 @@ const ChatRoom = ({ currentUser, selectedRoom, onLogout, onLeave}) => {
 
         if (selectedRoom?.id) {
             fetchMessages(); // Fetch initial messages when the room is selected
-
             // Set up SSE connection
             const eventSource = new EventSource(`http://localhost:8080/message/sse/room/${selectedRoom.id}`, {
                 headers: {
