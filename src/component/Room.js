@@ -29,7 +29,7 @@ const ChatRoomSelector = () => {
         const fetchChatRooms = async () => {
             try {
                 const token = localStorage.getItem('token'); // Retrieve the token
-                const response = await axios.get('http://localhost:8080/api/v1/rooms', {
+                const response = await axios.get('http://localhost:8081/api/v1/rooms', {
                     headers: {
                         Authorization: `Bearer ${token}`,  // Add the token to the headers
                     },
@@ -58,7 +58,7 @@ const ChatRoomSelector = () => {
     const markUserAsInactive = async (roomId) => {
         try {
             const token = localStorage.getItem('token'); // Retrieve the token
-            await axios.put(`http://localhost:8080/join/${currentUser.id}/${roomId}`, {}, {
+            await axios.put(`http://localhost:8081/join/${currentUser.id}/${roomId}`, {}, {
                 headers: {
                     Authorization: `Bearer ${token}`, // Add the token to the headers
                 },
@@ -75,7 +75,7 @@ const ChatRoomSelector = () => {
 
         try {
             const token = localStorage.getItem('token'); // Retrieve the token
-            const joinResponse = await axios.post('http://localhost:8080/join', {
+            const joinResponse = await axios.post('http://localhost:8081/join', {
                 userId: currentUser.id,
                 roomId: room.id,
             }, {
@@ -118,7 +118,7 @@ const ChatRoomSelector = () => {
     const handleCreateRoom = async () => {
         try {
             const token = localStorage.getItem('token'); // Retrieve the token
-            const createRoomResponse = await axios.post('http://localhost:8080/api/v1/rooms/create', {
+            const createRoomResponse = await axios.post('http://localhost:8081/api/v1/rooms/create', {
                 label: newRoomLabel,
                 createdBy: { id: currentUser.id, username: currentUser.username },
                 isPrivate: newRoomPrivacy === 'private',
@@ -149,7 +149,7 @@ const ChatRoomSelector = () => {
     const handleSaveEditedRoom = async () => {
         try {
             const token = localStorage.getItem('token'); // Retrieve the token
-            const editRoomResponse = await axios.put(`http://localhost:8080/api/v1/rooms/${editedRoomId}`, {
+            const editRoomResponse = await axios.put(`http://localhost:8081/api/v1/rooms/${editedRoomId}`, {
                 label: newRoomLabel,
                 createdBy: { id: currentUser.id, username: currentUser.username },
                 isPrivate: newRoomPrivacy === 'private',
@@ -176,7 +176,7 @@ const ChatRoomSelector = () => {
     const handleDeleteRoom = async (roomId) => {
         try {
             const token = localStorage.getItem('token'); // Retrieve the token
-            await axios.delete(`http://localhost:8080/api/v1/rooms/${roomId}`, {
+            await axios.delete(`http://localhost:8081/api/v1/rooms/${roomId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`, // Add the token to the headers
                 },

@@ -35,14 +35,14 @@ const ChatRoom = ({ currentUser, selectedRoom, onLogout, onLeave}) => {
 
     const fetchMessages = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/message/${selectedRoom.id}`, {
+            const response = await axios.get(`http://localhost:8081/message/${selectedRoom.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`, // Include the token in the header
                 },
             });
             setMessages(response.data);
 
-            const unseenResponse = await axios.get(`http://localhost:8080/message/${selectedRoom.id}/${currentUser.id}/unseenMessages`, {
+            const unseenResponse = await axios.get(`http://localhost:8081/message/${selectedRoom.id}/${currentUser.id}/unseenMessages`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -51,7 +51,7 @@ const ChatRoom = ({ currentUser, selectedRoom, onLogout, onLeave}) => {
 
             if (unseenMessages.length > 0) {
                 setUnseenMessageIds(unseenMessages.map(msg => msg.id));
-                await axios.post(`http://localhost:8080/message/${selectedRoom.id}/${currentUser.id}/markseen`, unseenMessages.map(msg => msg.id), {
+                await axios.post(`http://localhost:8081/message/${selectedRoom.id}/${currentUser.id}/markseen`, unseenMessages.map(msg => msg.id), {
                     headers: {
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${token}`, // Include the token in the header
@@ -62,7 +62,7 @@ const ChatRoom = ({ currentUser, selectedRoom, onLogout, onLeave}) => {
 
             // Fetch viewers for each message
             response.data.forEach(async (msg) => {
-                const viewersResponse = await axios.get(`http://localhost:8080/message/${selectedRoom.id}/${msg.id}/${currentUser.id}/viewers`, {
+                const viewersResponse = await axios.get(`http://localhost:8081/message/${selectedRoom.id}/${msg.id}/${currentUser.id}/viewers`, {
                     headers: {
                         Authorization: `Bearer ${token}`, // Include the token in the header
                     },
@@ -82,7 +82,7 @@ const ChatRoom = ({ currentUser, selectedRoom, onLogout, onLeave}) => {
 
     const markMessageAsSeen = async (messageId) => {
         try {
-            await axios.post(`http://localhost:8080/message/${selectedRoom.id}/${currentUser.id}/markseen`, [messageId], {
+            await axios.post(`http://localhost:8081/message/${selectedRoom.id}/${currentUser.id}/markseen`, [messageId], {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`, // Include the token in the header
@@ -100,7 +100,7 @@ const ChatRoom = ({ currentUser, selectedRoom, onLogout, onLeave}) => {
             if (!hasFetchedUnseenMessages) {
                 try {
                     // Fetch unseen messages
-                    const unseenResponse = await axios.get(`http://localhost:8080/message/${selectedRoom.id}/${currentUser.id}/unseenMessages`, {
+                    const unseenResponse = await axios.get(`http://localhost:8081/message/${selectedRoom.id}/${currentUser.id}/unseenMessages`, {
                         headers: {
                             Authorization: `Bearer ${token}`, // Include the token in the header
                         },
@@ -111,7 +111,7 @@ const ChatRoom = ({ currentUser, selectedRoom, onLogout, onLeave}) => {
 
                         // Mark unseen messages as seen
                         await axios.post(
-                            `http://localhost:8080/message/${selectedRoom.id}/${currentUser.id}/markseen`,
+                            `http://localhost:8081/message/${selectedRoom.id}/${currentUser.id}/markseen`,
                             unseenMessages.map((msg) => msg.id),
                             {
                                 headers: {
@@ -133,7 +133,7 @@ const ChatRoom = ({ currentUser, selectedRoom, onLogout, onLeave}) => {
         if (selectedRoom?.id) {
             fetchMessages(); // Fetch initial messages when the room is selected
             // Set up SSE connection
-            const eventSource = new EventSource(`http://localhost:8080/message/sse/room/${selectedRoom.id}`, {
+            const eventSource = new EventSource(`http://localhost:8081/message/sse/room/${selectedRoom.id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`, // Include the token in the header for SSE
                 },
@@ -178,10 +178,10 @@ const ChatRoom = ({ currentUser, selectedRoom, onLogout, onLeave}) => {
             };
 
             try {
-                await axios.post('http://localhost:8080/message', newMessage, {
+                await axios.post('http://localhost:8081/message', newMessage, {
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${token}`, // Include the token in the header
+                         Authorization: `Bearer ${token}`, // Include the token in the header
                     },
                 });
                 setMessage(''); // Clear input after sending
